@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.5'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.graalvm.buildtools.native' version '0.9.20'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-logging
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-logging', version: '3.0.5'
+    // https://mvnrepository.com/artifact/com.tersesystems.logback/logback-classic
+    implementation group: 'com.tersesystems.logback', name: 'logback-classic', version: '1.2.0'
+
+
+}
+
+//compile("org.springframework.boot:spring-boot-starter-security"){
+//    exclude module: "spring-boot-starter-logging"
+//    exclude module: "logback-classic"
+//}
+//compile("org.springframework.boot:spring-boot-starter-thymeleaf"){
+//    exclude module: "logback-classic"
+//}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
